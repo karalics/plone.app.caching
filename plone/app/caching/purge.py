@@ -15,6 +15,7 @@ from zope.component import getAdapters
 from zope.event import notify
 from zope.globalrequest import getRequest
 from zope.interface import implementer
+from zope.lifecycleevent.interfaces import IObjectAddedEvent
 from zope.lifecycleevent.interfaces import IObjectModifiedEvent
 from zope.lifecycleevent.interfaces import IObjectMovedEvent
 from zope.lifecycleevent.interfaces import IObjectRemovedEvent
@@ -220,6 +221,7 @@ def purgeOnMovedOrRemoved(object, event):
         # ignore extra delete events
         return
     # Don't purge when added
-    if event.oldName is not None and event.oldParent is not None:
-        if isPurged(object):
-            notify(Purge(object))
+    if IObjectAddedEvent.providedBy(event):
+        return
+    if isPurged(object):
+        notify(Purge(object))
