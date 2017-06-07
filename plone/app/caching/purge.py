@@ -225,3 +225,6 @@ def purgeOnMovedOrRemoved(object, event):
         return
     if isPurged(object):
         notify(Purge(object))
+    parent = object.getParentNode()
+    if parent:
+        notify(Purge(parent))
