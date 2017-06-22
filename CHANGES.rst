@@ -14,8 +14,9 @@ New features:
 
 Bug fixes:
 
-- *add item here*
-
+- Only fire 1 Purge() when deleting content, instead of 3 [skurfer]
+- Detect and ignore content creation more reliably [skurfer]
+- Also purge the parent object when something changes (since the parent probably displays a list that includes the item being changed) [skurfer]
 
 1.2.18 (2017-04-08)
 -------------------
